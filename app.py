@@ -22,8 +22,7 @@ def main(lod_manager):
         # Try to open and parse data.
         #
         with open(arguments['user_parameters_file'].file, 'r') as f:
-            reader = csv.DictReader(f)
-            json_data = [row for row in reader]
+            json_data = to_json.parse(f)
     except:
         confidence = 1000
         description = None
@@ -46,7 +45,7 @@ def main(lod_manager):
         actions = [
             {
                 'type' : 'execute_program',
-                'program' : "Orlando_test_program",
+                'program' : "Orlando-test-program",
                 'arguments' : {
                     'user_parameters_file' : 'userParametersFile',
                 }
