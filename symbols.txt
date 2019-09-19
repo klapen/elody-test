@@ -1,0 +1,13 @@
+[
+    {
+        name : orlando_test_program,
+        description : "This Symbol is part of the test.
+                        Triggers [[rule:Orlando_test_program]] when signalled."
+    },
+    {
+        name : orlando_test_program_tag,
+        description : "This Symbol is part of the test.
+                        This is used to request a visualization of the contents of the converted json file.
+                            0 : the converted json file"
+    },
+]

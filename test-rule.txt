@@ -1,0 +1,54 @@
+{
+    description : "This Rule is part of the test.
+                    This Rule reacts to [[symbol:orlando_test_program_tag]] and creates and presents an Option.
+                    That option allows the user to select parameters for the Program [[program:Orlando_test_program]] and executes it.",
+    name : "Orlando-test-program",
+    dependencies : [
+        {
+            _comment : "This Rule has only a single dependency, which is a Tag that should be created manually, as part of the Scenario Plan.",
+            symbol : !scenario_chat_file_input_status,
+        }
+    ],
+    trigger : {
+        _comment: "This Rule does not need a trigger. It should execute immediately when the dependency is fulfilled.
+                    By leaving this field blank, the default trigger is used: The Rule fires, but only once."
+    },
+    actions : [
+        {
+            _comment : "Some explanations about the Option created here:
+                        -The Program execution uses the 'userParametersFile' as an argument, so that [[program:Orlando_test_program]] has access to the data entered by the user.",
+            type : create_option,
+            name : "orlando-test-program",
+            description : "This Option will ask the user for parameters, then execute [[program:Orlando_test_program]] with those parameters.",
+            confidence : 1000.0,
+            trigger : {},
+            display : {
+                must_always_be_shown : true,
+                parameter_file_name : userParametersFile,
+                message_components : [
+                    {
+                        text : "This is a demonstration of a simple way to interactively run a program through your browser. This will run a python program on our server to parse a CSV to JSON, then show you the results."
+                    },
+                    {
+                        text : "Please select the CSV file to parse."
+                    }
+                ],
+                buttons : [
+                    {
+                        text : "Perform the prediction",
+                        style : cta,
+                    }
+                ],
+            },
+            actions : [
+                {
+                    type : execute_program,
+                    program : "Orlando_test_program",
+                    arguments : {
+                        user_parameters_file : userParametersFile,
+                    }
+                },
+            ]
+        }
+    ]
+}
